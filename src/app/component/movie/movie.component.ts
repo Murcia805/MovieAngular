@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from '../../services/movie-api.service';
+import { Select_List } from '../../modals/select-item.model';
 
 @Component({
   selector: 'app-movie',
@@ -9,23 +10,131 @@ import { MovieApiService } from '../../services/movie-api.service';
 export class MovieComponent implements OnInit {
 
   public movies: any[] = [];
+  public moviesRecent: any[] = [];
+
+  public seriesPopular: any[] = [];
+  public seriesTopRated: any[] = [];
+
+  public displayMovies:any[] = [];
 
   public dataMovie: any;
 
+  public selectedLevel:number = 1;
+
+  public botonPopulares: boolean = true;
+  public botonRecientes: boolean = false;
+
+  public selectLista: Select_List[] = [
+    {id: 1, name: 'Peliculas'},
+    {id: 2, name: 'Series'}
+  ];
+
+  public nombre: string = "Peliculas";
+
   constructor(private service: MovieApiService) {
-    this.service.getJson().subscribe( (data: any) => {
-      console.log(data);
+    // Peliculas
+    this.service.getJsonPopular().subscribe( (data: any) => {
+      // console.log(data);
       this.movies = data.results;
       this.dataMovie = data.results[0];
+      this.displayMovies = this.movies;
    });
-  }
+   this.service.getJsonTopRated().subscribe( (data:any) => {
+     // console.log(data);
+     this.moviesRecent = data.results;
+   });
 
-  displayInfo(id: number) {
-    alert(id);
-    this.dataMovie = this.movies[id];
+   // Series
+   this.service.getJsonSeriesPupular().subscribe( (data: any) => {
+     // console.log(data);
+     this.seriesPopular = data.results;
+   });
+   
+   this.service.getJsonSeriesTopRated().subscribe( (data: any) => {
+     // console.log(data);
+     this.seriesTopRated = data.results;
+   });
   }
 
   ngOnInit() {
   }
 
+  displayInfo(id: number) {
+    // alert(id);
+    if(this.selectedLevel == 1){
+      if(this.botonPopulares){
+        this.dataMovie = this.movies[id];
+      }else if(this.botonRecientes){
+        this.dataMovie = this.moviesRecent[id];
+      }
+    }else if(this.selectedLevel == 2){
+      if(this.botonPopulares){
+        this.dataMovie = this.seriesPopular[id];
+      }else if(this.botonRecientes){
+        this.dataMovie = this.seriesTopRated[id];
+      }
+    }
+    
+  }
+
+  getPopulares(){
+    if(this.selectedLevel == 1){
+      if(this.botonPopulares == false){
+        this.botonPopulares = true;
+        this.botonRecientes = false;
+        this.displayMovies = [];
+        this.displayMovies = this.movies;
+      }
+    }else if(this.selectedLevel == 2){
+      if(this.botonPopulares == false){
+        this.botonPopulares = true;
+        this.botonRecientes = false;
+        this.displayMovies = [];
+        this.displayMovies = this.seriesPopular;
+      }
+    }
+  }
+
+  getMejorPuntuadas(){
+    if(this.selectedLevel == 1){
+      if(this.botonRecientes == false){
+        this.botonRecientes = true;
+        this.botonPopulares = false;
+        this.displayMovies = [];
+        this.displayMovies = this.moviesRecent;
+      }
+    }else if(this.selectedLevel == 2){
+      if(this.botonRecientes == false){
+        this.botonRecientes = true;
+        this.botonPopulares = false;
+        this.displayMovies = [];
+        this.displayMovies = this.seriesTopRated;
+      }
+    }
+  }
+
+  selected(){
+    //alert(this.selectedLevel);
+    if(this.selectedLevel == 1){
+      this.nombre = "";
+      this.nombre = "Peliculas";
+      if(this.botonPopulares){
+        this.displayMovies = [];
+        this.displayMovies = this.movies;
+      }else if(this.botonRecientes){
+        this.displayMovies = [];
+        this.displayMovies = this.moviesRecent;
+      }
+    }else if(this.selectedLevel == 2){
+      this.nombre = "";
+      this.nombre = "Series";
+      if(this.botonPopulares){
+        this.displayMovies = [];
+        this.displayMovies = this.seriesPopular;
+      }else if(this.botonRecientes){
+        this.displayMovies = [];
+        this.displayMovies = this.seriesTopRated;
+      }
+    }  
+  }
 }

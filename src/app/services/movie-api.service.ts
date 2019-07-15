@@ -12,7 +12,7 @@ export class MovieApiService {
 
   constructor(private http: HttpClient) { }
 
-  getJson() {
+  getJsonPopular() {
     return this.http.get(this.baseURL + this.pupularUrl);
   }
 
@@ -22,5 +22,17 @@ export class MovieApiService {
 
   getJsonByName(nameMovie: string) {
     return this.http.get(this.baseURL + 'search/movie?api_key=' + this.apiKey + '&query=' + nameMovie);
+  }
+
+  getJsonTopRated(){
+    return this.http.get(this.baseURL + 'movie/top_rated?api_key=' + this.apiKey);
+  }
+
+  getJsonSeriesPupular(){
+    return this.http.get(this.baseURL + 'tv/popular?api_key=' + this.apiKey);
+  }
+
+  getJsonSeriesTopRated(){
+    return this.http.get(this.baseURL + 'tv/top_rated?api_key=' + this.apiKey);
   }
 }

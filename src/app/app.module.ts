@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,7 @@ import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { SearchComponent } from './component/search/search.component';
 import { MovieComponent } from './component/movie/movie.component';
+import { ArtistComponent } from './component/artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { MovieComponent } from './component/movie/movie.component';
     NavbarComponent,
     FooterComponent,
     SearchComponent,
-    MovieComponent
+    MovieComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
