@@ -16,11 +16,11 @@ export class MovieComponent implements OnInit {
   public seriesPopular: any[] = [];
   public seriesTopRated: any[] = [];
 
-  public displayMovies:any[] = [];
+  public displayMovies: any[] = [];
 
   public dataMovie: any;
 
-  public selectedLevel:number = 1;
+  public selectedLevel: number = 1;
 
   public botonPopulares: boolean = true;
   public botonRecientes: boolean = false;
@@ -30,7 +30,7 @@ export class MovieComponent implements OnInit {
     {id: 2, name: 'Series'}
   ];
 
-  public nombre: string = "Peliculas";
+  public nombre: string = 'Peliculas';
 
   constructor(private service: MovieApiService, private router: Router) {
     // Peliculas
@@ -39,22 +39,18 @@ export class MovieComponent implements OnInit {
       this.movies = data.results;
       this.dataMovie = data.results[0];
       this.displayMovies = this.movies;
-   });
-   this.service.getJsonTopRated().subscribe( (data:any) => {
-     // console.log(data);
-     this.moviesRecent = data.results;
-   });
+    });
+    this.service.getJsonTopRated().subscribe( (data:any) => {
+      this.moviesRecent = data.results;
+    });
+    // Series
+    this.service.getJsonSeriesPupular().subscribe( (data: any) => {
+      this.seriesPopular = data.results;
+    });
 
-   // Series
-   this.service.getJsonSeriesPupular().subscribe( (data: any) => {
-     // console.log(data);
-     this.seriesPopular = data.results;
-   });
-   
-   this.service.getJsonSeriesTopRated().subscribe( (data: any) => {
-     // console.log(data);
-     this.seriesTopRated = data.results;
-   });
+    this.service.getJsonSeriesTopRated().subscribe( (data: any) => {
+      this.seriesTopRated = data.results;
+    });
   }
 
   ngOnInit() {
@@ -62,32 +58,31 @@ export class MovieComponent implements OnInit {
 
   displayInfo(id: number) {
     // alert(id);
-    if(this.selectedLevel == 1){
-      if(this.botonPopulares){
+    if (this.selectedLevel == 1) {
+      if (this.botonPopulares) {
         this.dataMovie = this.movies[id];
-      }else if(this.botonRecientes){
+      } else if (this.botonRecientes) {
         this.dataMovie = this.moviesRecent[id];
       }
-    }else if(this.selectedLevel == 2){
-      if(this.botonPopulares){
+    } else if (this.selectedLevel == 2) {
+      if (this.botonPopulares) {
         this.dataMovie = this.seriesPopular[id];
-      }else if(this.botonRecientes){
+      } else if (this.botonRecientes) {
         this.dataMovie = this.seriesTopRated[id];
       }
     }
-    
   }
 
   getPopulares(){
-    if(this.selectedLevel == 1){
-      if(this.botonPopulares == false){
+    if (this.selectedLevel == 1) {
+      if (this.botonPopulares == false) {
         this.botonPopulares = true;
         this.botonRecientes = false;
         this.displayMovies = [];
         this.displayMovies = this.movies;
       }
-    }else if(this.selectedLevel == 2){
-      if(this.botonPopulares == false){
+    } else if (this.selectedLevel == 2) {
+      if (this.botonPopulares == false) {
         this.botonPopulares = true;
         this.botonRecientes = false;
         this.displayMovies = [];
@@ -97,15 +92,15 @@ export class MovieComponent implements OnInit {
   }
 
   getMejorPuntuadas(){
-    if(this.selectedLevel == 1){
-      if(this.botonRecientes == false){
+    if (this.selectedLevel == 1) {
+      if (this.botonRecientes == false) {
         this.botonRecientes = true;
         this.botonPopulares = false;
         this.displayMovies = [];
         this.displayMovies = this.moviesRecent;
       }
-    }else if(this.selectedLevel == 2){
-      if(this.botonRecientes == false){
+    } else if(this.selectedLevel == 2) {
+      if (this.botonRecientes == false) {
         this.botonRecientes = true;
         this.botonPopulares = false;
         this.displayMovies = [];
@@ -114,37 +109,35 @@ export class MovieComponent implements OnInit {
     }
   }
 
-  selected(){
-    //alert(this.selectedLevel);
-    if(this.selectedLevel == 1){
-      this.nombre = "";
-      this.nombre = "Peliculas";
-      if(this.botonPopulares){
+  selected( ){
+    if (this.selectedLevel == 1) {
+      this.nombre = '';
+      this.nombre = 'Peliculas';
+      if (this.botonPopulares) {
         this.displayMovies = [];
         this.displayMovies = this.movies;
-      }else if(this.botonRecientes){
+      } else if (this.botonRecientes) {
         this.displayMovies = [];
         this.displayMovies = this.moviesRecent;
       }
-    }else if(this.selectedLevel == 2){
-      this.nombre = "";
-      this.nombre = "Series";
-      if(this.botonPopulares){
+    } else if (this.selectedLevel == 2) {
+      this.nombre = '';
+      this.nombre = 'Series';
+      if (this.botonPopulares) {
         this.displayMovies = [];
         this.displayMovies = this.seriesPopular;
-      }else if(this.botonRecientes){
+      } else if (this.botonRecientes) {
         this.displayMovies = [];
         this.displayMovies = this.seriesTopRated;
       }
-    }  
+    }
   }
 
   buscarDetalle(id: number) {
     if (this.selectedLevel == 1) {
       this.router.navigate(['/movie', 'MV-' + id]);
-    }else if(this.selectedLevel == 2) {
+    } else if (this.selectedLevel == 2) {
       this.router.navigate(['/movie', 'SR-' + id]);
     }
-    
   }
 }

@@ -8,10 +8,10 @@
         <h5 class="mt-0 ">{{ infoMovie.title || infoMovie.name }}</h5>
         <hr>
         <p>{{ infoMovie.overview }}</p>
-        <h5 class="mt-0 "> Peliculas relacionadas </h5>
+        <h5 class="mt-0" *ngIf="listSimilar"> {{name}} relacionadas </h5>
         <hr>
-        <div style="background: ghostwhite">
-            <ngb-carousel *ngIf="listSimilar != null" class="father-carousel">
+        <div style="background: grey">
+            <ngb-carousel *ngIf="listSimilar != []" class="father-carousel">
                 <ng-template ngbSlide *ngFor="let item of listSimilar">
                     <a (click)="getInfoMovie(item.id)">
                         <img class="imagen-corou" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="Random first slide">

@@ -15,7 +15,9 @@ export class MovieDetailComponent implements OnInit {
   public idData: string[];
   public infoMovie: any;
   public videoInfo: any;
-  public listSimilar: any;
+  public listSimilar: any[];
+
+  public name: string;
 
   private youtubeURL = 'https://www.youtube.com/embed/';
 
@@ -33,6 +35,7 @@ export class MovieDetailComponent implements OnInit {
       this.idData = params[ 'id' ].split('-');
       console.log(this.idData[0]);
       if ( this.idData[0] == 'MV') {
+        this.name = 'Peliculas';
         this.service.getJsonById(this.idData[1]).subscribe( (data: any) => {
           this.infoMovie = data;
           this.service.getJsonVideoById(this.idData[1]).subscribe( (dataVideo: any) => {
@@ -43,15 +46,19 @@ export class MovieDetailComponent implements OnInit {
           });
         });
       } else if (this.idData[0] == 'SR') {
+        this.name = 'Series';
         this.service.getJsonSeriesById(this.idData[1]).subscribe( (data: any) => {
           this.infoMovie = data;
           this.service.getJsonVideoSerieById(this.idData[1]).subscribe( (dataVideo: any) => {
             this.videoInfo = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeURL + dataVideo);
           });
           this.service.getJsonSeriesSimilarById(this.idData[1]).subscribe( (dataSimilars: any) => {
-            this.listSimilar = dataSimilars.results;
-          })
-        })
+            console.log(dataSimilars.results);
+            if (dataSimilars.results.length != 0) {
+              this.listSimilar = dataSimilars.results;
+            }
+          });
+        });
       } else {
         this.route.navigate(['/movie']);
       }

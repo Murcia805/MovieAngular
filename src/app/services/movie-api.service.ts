@@ -67,4 +67,12 @@ export class MovieApiService {
   getJsonArtistaById(id: number) {
     return this.http.get(this.baseURL + 'person/' + id + '?api_key=' + this.apiKey);
   }
+
+  getJsonArtistaMoviesById(id: string) {
+    return this.http.get(this.baseURL + 'person/' + id + '/movie_credits?api_key=' + this.apiKey);
+  }
+
+  getJsonArtistaSeriesById(id: string) {
+    return this.http.get(this.baseURL + 'person/' + id + '/tv_credits?api_key=' + this.apiKey);
+  }
 }
