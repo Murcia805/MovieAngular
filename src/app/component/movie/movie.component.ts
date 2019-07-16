@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from '../../services/movie-api.service';
 import { Select_List } from '../../modals/select-item.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -31,7 +32,7 @@ export class MovieComponent implements OnInit {
 
   public nombre: string = "Peliculas";
 
-  constructor(private service: MovieApiService) {
+  constructor(private service: MovieApiService, private router: Router) {
     // Peliculas
     this.service.getJsonPopular().subscribe( (data: any) => {
       // console.log(data);
@@ -136,5 +137,14 @@ export class MovieComponent implements OnInit {
         this.displayMovies = this.seriesTopRated;
       }
     }  
+  }
+
+  buscarDetalle(id: number) {
+    if (this.selectedLevel == 1) {
+      this.router.navigate(['/movie', 'MV-' + id]);
+    }else if(this.selectedLevel == 2) {
+      this.router.navigate(['/movie', 'SR-' + id]);
+    }
+    
   }
 }

@@ -10,6 +10,8 @@ import { FooterComponent } from './component/footer/footer.component';
 import { SearchComponent } from './component/search/search.component';
 import { MovieComponent } from './component/movie/movie.component';
 import { ArtistComponent } from './component/artist/artist.component';
+import { MovieDetailComponent } from './component/movie-detail/movie-detail.component';
+import { ArtistDetailComponent } from './component/artist-detail/artist-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ArtistComponent } from './component/artist/artist.component';
     FooterComponent,
     SearchComponent,
     MovieComponent,
-    ArtistComponent
+    ArtistComponent,
+    MovieDetailComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,

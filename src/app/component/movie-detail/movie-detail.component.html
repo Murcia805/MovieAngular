@@ -1,0 +1,13 @@
+<div class="embed-responsive embed-responsive-16by9" *ngIf="videoInfo != ''">
+    <iframe class="embed-responsive-item" [src]="'https://www.youtube.com/embed/'+ videoInfo"></iframe>
+</div>
+
+<hr>
+
+<div class="media m-5" *ngIf="infoMovie != null">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + infoMovie.poster_path" class="align-self-start mr-3" alt="{{infoMovie.title}}">
+    <div class="media-body">
+        <h5 class="mt-0">{{ infoMovie.title || infoMovie.name }}</h5>
+        <p>{{ infoMovie.overview }}</p>
+    </div>
+</div>

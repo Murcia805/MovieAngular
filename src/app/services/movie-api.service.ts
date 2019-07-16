@@ -28,6 +28,12 @@ export class MovieApiService {
     return this.http.get(this.baseURL + 'movie/top_rated?api_key=' + this.apiKey);
   }
 
+  getJsonVideoById(id: string) {
+    return this.http.get(this.baseURL + 'movie/' + id + '?api_key=' + this.apiKey);
+  }
+
+  //SERIES
+
   getJsonSeriesPupular() {
     return this.http.get(this.baseURL + 'tv/popular?api_key=' + this.apiKey);
   }
@@ -35,6 +41,16 @@ export class MovieApiService {
   getJsonSeriesTopRated() {
     return this.http.get(this.baseURL + 'tv/top_rated?api_key=' + this.apiKey);
   }
+
+  getJsonSeriesById(id: string) {
+    return this.http.get(this.baseURL + 'tv/' + id + '?api_key=' + this.apiKey);
+  }
+
+  getJsonVideoSerieById(id: string) {
+    return this.http.get(this.baseURL + 'tv/' + id + '?api_key=' + this.apiKey)
+  }
+
+  //ARTISTAS
 
   getJsonArtistas() {
     return this.http.get(this.baseURL + 'person/popular?api_key=' + this.apiKey);
