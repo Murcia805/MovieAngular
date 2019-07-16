@@ -13,6 +13,7 @@ import { ArtistComponent } from './component/artist/artist.component';
 import { MovieDetailComponent } from './component/movie-detail/movie-detail.component';
 import { ArtistDetailComponent } from './component/artist-detail/artist-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from './component/about/about.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MovieComponent,
     ArtistComponent,
     MovieDetailComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
