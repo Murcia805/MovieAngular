@@ -1,5 +1,5 @@
 <div class="container align-items-center mt-5 mb-5">
-    <h1>{{nombre}}: </h1>
+    <h1>{{nombre}} </h1>
     <form class="form-inline">
         <label for="inputState"></label>
         <select name="selectLista" type="number" id="inputState" class="form-control" [(ngModel)]="selectedLevel" (ngModelChange)="selected()">
@@ -7,10 +7,10 @@
                 {{item.name}}
             </option>
         </select>
-        <button type="button" class="btn btn-outline-primary ml-2" [ngClass]="{'active':botonPopulares}" (click)="getPopulares()" >Populares</button>
+        <button type="button" class="btn btn-outline-primary ml-2" [ngClass]="{'active':botonPopulares}" (click)="getPopulares()">Populares</button>
         <button type="button" class="btn btn-outline-dark ml-2" [ngClass]="{'active':botonRecientes}" (click)="getMejorPuntuadas()">Mejores Puntuadas</button>
     </form>
-    
+
     <hr class="my-4">
     <div class="card-deck cont-over">
         <div class="card" *ngFor="let mv of displayMovies; let i = index" [attr.data-index]="i">
