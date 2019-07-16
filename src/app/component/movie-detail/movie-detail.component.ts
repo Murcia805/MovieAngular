@@ -42,7 +42,9 @@ export class MovieDetailComponent implements OnInit {
             this.videoInfo = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeURL + dataVideo);
           });
           this.service.getJsonSimilarById(this.idData[1]).subscribe( (dataSimilars: any) => {
-            this.listSimilar = dataSimilars.results;
+            if (dataSimilars.results.length != 0) {
+              this.listSimilar = dataSimilars.results;
+            }
           });
         });
       } else if (this.idData[0] == 'SR') {

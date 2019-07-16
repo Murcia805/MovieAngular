@@ -5,7 +5,7 @@
 <div class="media m-5" *ngIf="infoMovie != null">
     <img [src]=" 'https://image.tmdb.org/t/p/w500' + infoMovie.poster_path " class="align-self-start mr-3 img-fluid imagen" alt="{{infoMovie.title}} ">
     <div class="media-body">
-        <h5 class="mt-0 ">{{ infoMovie.title || infoMovie.name }}</h5>
+        <h1 class="mt-0 ">{{ infoMovie.title || infoMovie.name }}</h1>
         <hr>
         <p>{{ infoMovie.overview }}</p>
         <h5 class="mt-0" *ngIf="listSimilar"> {{name}} relacionadas </h5>
