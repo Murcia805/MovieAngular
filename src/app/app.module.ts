@@ -12,6 +12,7 @@ import { MovieComponent } from './component/movie/movie.component';
 import { ArtistComponent } from './component/artist/artist.component';
 import { MovieDetailComponent } from './component/movie-detail/movie-detail.component';
 import { ArtistDetailComponent } from './component/artist-detail/artist-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ArtistDetailComponent } from './component/artist-detail/artist-detail.c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

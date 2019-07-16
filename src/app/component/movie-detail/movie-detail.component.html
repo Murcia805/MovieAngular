@@ -1,13 +1,26 @@
-<div class="embed-responsive embed-responsive-16by9" *ngIf="videoInfo != ''">
-    <iframe class="embed-responsive-item" [src]="'https://www.youtube.com/embed/'+ videoInfo"></iframe>
+<div class="embed-responsive embed-responsive-16by9 mb-4" *ngIf="videoInfo != ''">
+    <iframe class="embed-responsive-item" [src]='getVideoInfo()' allow="autoplay;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
-
-<hr>
-
+<hr class="m-4">
 <div class="media m-5" *ngIf="infoMovie != null">
-    <img [src]="'https://image.tmdb.org/t/p/w500' + infoMovie.poster_path" class="align-self-start mr-3" alt="{{infoMovie.title}}">
+    <img [src]=" 'https://image.tmdb.org/t/p/w500' + infoMovie.poster_path " class="align-self-start mr-3 img-fluid imagen" alt="{{infoMovie.title}} ">
     <div class="media-body">
-        <h5 class="mt-0">{{ infoMovie.title || infoMovie.name }}</h5>
+        <h5 class="mt-0 ">{{ infoMovie.title || infoMovie.name }}</h5>
+        <hr>
         <p>{{ infoMovie.overview }}</p>
+        <h5 class="mt-0 "> Peliculas relacionadas </h5>
+        <hr>
+        <div style="background: ghostwhite">
+            <ngb-carousel *ngIf="listSimilar != null" class="father-carousel">
+                <ng-template ngbSlide *ngFor="let item of listSimilar">
+                    <a (click)="getInfoMovie(item.id)">
+                        <img class="imagen-corou" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="Random first slide">
+                    </a>
+                    <div class="carousel-caption">
+                        <h3>{{ item.title || item.name}}</h3>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
     </div>
 </div>
