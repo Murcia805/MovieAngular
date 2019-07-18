@@ -36,6 +36,10 @@ export class MovieApiService {
     return this.http.get(this.baseURL + 'movie/' + id + '/similar?api_key=' + this.apiKey);
   }
 
+  getJsonMovieArtistasById(id: string) {
+    return this.http.get(this.baseURL + 'movie/' + id + '/credits?api_key=' + this.apiKey);
+  }
+
   //SERIES
 
   getJsonSeriesPupular() {
@@ -60,6 +64,10 @@ export class MovieApiService {
 
   getJsonSeriesByName(name: string) {
     return this.http.get(this.baseURL + 'search/tv?api_key=' + this.apiKey + '&query=' + name);
+  }
+
+  getJsonSeriesArtistasById(id: string) {
+    return this.http.get(this.baseURL + 'tv/' + id + '/credits?api_key=' + this.apiKey);
   }
 
   //ARTISTAS
