@@ -1,5 +1,5 @@
 <div class="embed-responsive embed-responsive-16by9 mb-4" *ngIf="videoInfo != ''">
-    <iframe class="embed-responsive-item" [src]='getVideoInfo()' allow="autoplay;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <iframe class="embed-responsive-item" [src]="getVideoInfo()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <hr class="m-4">
 <div class="media m-5" *ngIf="infoMovie != null">

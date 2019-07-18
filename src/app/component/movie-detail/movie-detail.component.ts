@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieApiService } from '../../services/movie-api.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl  } from '@angular/platform-browser';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -52,7 +52,7 @@ export class MovieDetailComponent implements OnInit {
         this.service.getJsonSeriesById(this.idData[1]).subscribe( (data: any) => {
           this.infoMovie = data;
           this.service.getJsonVideoSerieById(this.idData[1]).subscribe( (dataVideo: any) => {
-            this.videoInfo = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeURL + dataVideo);
+            this.videoInfo = dataVideo;
           });
           this.service.getJsonSeriesSimilarById(this.idData[1]).subscribe( (dataSimilars: any) => {
             console.log(dataSimilars.results);
@@ -68,7 +68,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getVideoInfo() {
-    return this.videoInfo;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeURL + this.videoInfo +'?rel=0');
   }
 
   getInfoMovie(id: string) {
