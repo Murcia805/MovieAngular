@@ -8,8 +8,8 @@
         <h5 class="mt-0">Popularidad</h5>
         <hr>
         <p>{{artistData.popularity}}</p>
-        <h5 class="mt-0 "> Peliculas </h5>
-        <hr>
+        <h5 class="mt-0 " *ngIf="listPeliculasArtista != null"> Peliculas </h5>
+        <hr *ngIf="listPeliculasArtista != null">
         <div style="background: grey">
             <ngb-carousel *ngIf="listPeliculasArtista != null" class="father-carousel">
                 <ng-template ngbSlide *ngFor="let item of listPeliculasArtista">
@@ -31,7 +31,7 @@
                         <img class="imagen-corou" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="Random first slide">
                     </a>
                     <div class="carousel-caption">
-                        <h3>{{ item.title }}</h3>
+                        <h3>{{ item.title || item.name }}</h3>
                     </div>
                 </ng-template>
             </ngb-carousel>

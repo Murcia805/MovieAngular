@@ -72,7 +72,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getInfoMovie(id: string) {
-    alert(id);
+    this.route.navigate(['/movie', 'MV-' + id]);
   }
 
 }
